@@ -1,22 +1,41 @@
-# SCOT Campus ERP
+# SCOT Campus Enterprise ERP
 
-Frontend for the SCOT Campus Enterprise ERP. The four working modules are Employee Dashboard, HR Dashboard, Admin & Logistics, and IT Helpdesk.
-
-## Development
-
-```sh
-bun install
-bun run dev
-```
-
-The app runs on [http://localhost:3000](http://localhost:3000). `Ctrl+K` opens global search.
-
-Seed data is used until the Spring Boot API is available. Copy `.env.example` to `.env` and set `VITE_USE_API=true` when `VITE_API_BASE_URL` is reachable.
+Monorepo for the SCOT Campus ERP: a React (TanStack Start) frontend and a Spring Boot API.
 
 ## Layout
 
-- `src/routes` — TanStack Start file routes. Keep these thin.
-- `src/pages` — module screens.
-- `src/components/layout` — sidebar, header, search, notifications.
-- `src/components/erp` — shared campus UI.
-- `src/hooks`, `src/types`, `src/utils` — data access and helpers.
+- `frontend/` — campus UI (Employee, HR, Admin & Logistics, IT Helpdesk)
+- `backend/` — Spring Boot 4.1 REST API (Java 21, Maven, PostgreSQL)
+- `.cursorrules` — shared UI design tokens for frontend work
+- `docker-compose.yml` — local PostgreSQL, plus optional app containers
+
+## Local development
+
+Start PostgreSQL:
+
+```sh
+docker compose up -d postgres
+```
+
+Frontend:
+
+```sh
+cd frontend
+npm install
+npm run dev
+```
+
+The UI runs at [http://localhost:3000](http://localhost:3000). Unauthenticated visits redirect to `/login`. Use the four Quick Dev Login buttons (IT Admin, System Admin, HR Officer, Employee) to store a mock JWT in `localStorage` and open that role’s dashboard. Google Workspace OAuth is not wired yet.
+
+`Ctrl+K` opens global search. Seed data is used until `VITE_USE_API=true` and `VITE_API_BASE_URL` point at the API.
+
+Backend (run from `backend/`, not the repo root):
+
+```sh
+cd backend
+./mvnw spring-boot:run
+```
+
+On Windows use `mvnw.cmd`. The API listens on [http://localhost:8080](http://localhost:8080) and connects to `jdbc:postgresql://localhost:5432/scot_erp_db` as `scot` / `scot`.
+
+Optional: `docker compose --profile apps up --build` starts PostgreSQL, the API, and the UI together.
