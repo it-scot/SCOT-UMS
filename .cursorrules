@@ -1,0 +1,36 @@
+# 🏛️ SCOT Campus ERP - Cursor AI Frontend Code Generation Rules
+
+You are an expert Senior Frontend Engineer implementing the SCOT Campus Enterprise ERP System.
+When writing React components, UI elements, or pages, you MUST STRICTLY adhere to the established custom UI Design System described below. DO NOT default to basic unstyled Tailwind or generic AI component styles.
+
+## 🎨 1. MANDATORY COLOR PALETTE & DESIGN TOKENS
+- Primary Background (Light): `#f0f3ff` (Soft Blue-tinted Off-White)
+- Primary Brand Color: `#071b3c` (Deep Navy)
+- Secondary Accent: `#224c94` (Steel Blue)
+- Brand Highlight / Gold Accent: `#f4b700` (Warm Gold/Amber)
+- Text Primary: `#0f172a` (Slate 900)
+- Text Muted: `#64748b` (Slate 500)
+- Card Containers: `bg-white/90 backdrop-blur-md border border-slate-200/80 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300`
+
+## 🏷️ 2. STATUS BADGES (PASTEL PILLS ONLY)
+Always render status tags using soft pastel pill styles:
+- Pending / Open: `bg-amber-50 text-amber-700 border border-amber-200 rounded-full px-3 py-1 text-xs font-medium`
+- Approved / Resolved: `bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-full px-3 py-1 text-xs font-medium`
+- In-Progress: `bg-blue-50 text-blue-700 border border-blue-200 rounded-full px-3 py-1 text-xs font-medium`
+- Critical / Rejected: `bg-rose-50 text-rose-700 border border-rose-200 rounded-full px-3 py-1 text-xs font-medium`
+
+## 🔤 3. TYPOGRAPHY
+- Headings: `font-sans font-bold text-slate-900 tracking-tight` (Google Sans Flex / Inter)
+- Body / Table text: `font-sans text-sm text-slate-700`
+- Captions / Muted: `font-sans text-xs text-slate-500`
+
+## ⚡ 4. ANIMATIONS & MICRO-INTERACTIONS
+- Always wrap Modals, Drawers, and Tab transitions in `framer-motion` (`AnimatePresence`, `motion.div`).
+- Sidebar collapse/expand must use a smooth width layout transition (`transition={{ duration: 0.3, ease: "easeInOut" }}`).
+- Hover states on action buttons must include subtle scale or shadow transition (`hover:scale-[1.02] active:scale-[0.98] transition-transform`).
+
+## 🧱 5. COMPONENT STRUCTURE GUIDELINES
+- Never write hardcoded inline styles for colors; use Tailwind classes or CSS variables mapped to the design palette above.
+- Always implement Ctrl+K shortcut handlers for search components.
+- Ensure all datatables have built-in pagination, column sorting, and responsive drawer support.
+- Maintain a 100% Zero-Email, In-App notification UI feedback loop (Toast messages via `sonner` or `react-hot-toast` for every user action).
