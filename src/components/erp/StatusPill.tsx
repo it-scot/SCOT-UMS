@@ -1,27 +1,28 @@
 import { cn } from "@/lib/utils";
 
-export type Status = "Pending" | "Open" | "Approved" | "Resolved" | "In-Progress" | "Critical" | "High" | "Active" | "On Leave" | "Assigned" | "Repair";
+const styles = {
+  pending: "bg-amber-50 text-amber-700 border border-amber-200",
+  success: "bg-emerald-50 text-emerald-700 border border-emerald-200",
+  progress: "bg-blue-50 text-blue-700 border border-blue-200",
+  critical: "bg-rose-50 text-rose-700 border border-rose-200",
+} as const;
 
-const map: Record<string, string> = {
-  pending: "bg-pending-bg text-pending border-pending-border",
-  success: "bg-success-bg text-success border-success-border",
-  info: "bg-info-bg text-info border-info-border",
-  critical: "bg-critical-bg text-critical border-critical-border",
-};
-
-const tone = (s: string) =>
-  ["Pending", "Open", "On Leave", "Repair"].includes(s)
-    ? "pending"
-    : ["Approved", "Resolved", "Active"].includes(s)
-      ? "success"
-      : ["In-Progress", "Assigned"].includes(s)
-        ? "info"
-        : "critical";
+function tone(status: string) {
+  if (["Pending", "Open", "On Leave", "Repair", "High"].includes(status)) return "pending";
+  if (["Approved", "Resolved", "Active"].includes(status)) return "success";
+  if (["In-Progress", "Assigned"].includes(status)) return "progress";
+  return "critical";
+}
 
 export function StatusPill({ status, className }: { status: string; className?: string }) {
   return (
-    <span className={cn("inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 text-[11px] font-medium", map[tone(status)], className)}>
-      <span className="size-1.5 rounded-full bg-current opacity-70" />
+    <span
+      className={cn(
+        "inline-flex items-center rounded-full px-3 py-1 text-xs font-medium",
+        styles[tone(status)],
+        className,
+      )}
+    >
       {status}
     </span>
   );
