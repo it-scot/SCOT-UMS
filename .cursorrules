@@ -34,3 +34,10 @@ Always render status tags using soft pastel pill styles:
 - Always implement Ctrl+K shortcut handlers for search components.
 - Ensure all datatables have built-in pagination, column sorting, and responsive drawer support.
 - Maintain a 100% Zero-Email, In-App notification UI feedback loop (Toast messages via `sonner` or `react-hot-toast` for every user action).
+
+## 🔄 6. DATA FETCHING & STATE MANAGEMENT (TANSTACK QUERY)
+- Always use **TanStack Query v5 (`@tanstack/react-query`)** for all API data fetching, caching, and server state management.
+- Never use raw `useEffect` with `fetch` or `axios` inside components for API data loading; encapsulate them inside custom hooks using `useQuery` or `useMutation`.
+- Implement proper query keys hierarchy (e.g., `['students', studentId]`, `['courses', listParams]`) for efficient cache invalidation.
+- Always handle loading, error, and empty states explicitly in UI components when consuming queries.
+- Use `useMutation` along with `queryClient.invalidateQueries` for POST/PUT/DELETE operations to ensure instant UI synchronization.

@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as HelpdeskRouteImport } from './routes/helpdesk'
+import { Route as HrRouteImport } from './routes/hr'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -28,35 +29,44 @@ const HelpdeskRoute = HelpdeskRouteImport.update({
   path: '/helpdesk',
   getParentRoute: () => rootRouteImport,
 } as any)
+const HrRoute = HrRouteImport.update({
+  id: '/hr',
+  path: '/hr',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
   '/helpdesk': typeof HelpdeskRoute
+  '/hr': typeof HrRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
   '/helpdesk': typeof HelpdeskRoute
+  '/hr': typeof HrRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
   '/helpdesk': typeof HelpdeskRoute
+  '/hr': typeof HrRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/admin' | '/helpdesk'
+  fullPaths: '/' | '/admin' | '/helpdesk' | '/hr'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/admin' | '/helpdesk'
-  id: '__root__' | '/' | '/admin' | '/helpdesk'
+  to: '/' | '/admin' | '/helpdesk' | '/hr'
+  id: '__root__' | '/' | '/admin' | '/helpdesk' | '/hr'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminRoute: typeof AdminRoute
   HelpdeskRoute: typeof HelpdeskRoute
+  HrRoute: typeof HrRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -82,6 +92,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HelpdeskRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/hr': {
+      id: '/hr'
+      path: '/hr'
+      fullPath: '/hr'
+      preLoaderRoute: typeof HrRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -89,6 +106,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRoute,
   HelpdeskRoute: HelpdeskRoute,
+  HrRoute: HrRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
