@@ -8,9 +8,9 @@ const styles = {
 } as const;
 
 function tone(status: string) {
-  if (["Pending", "Open", "On Leave", "Repair", "High"].includes(status)) return "pending";
-  if (["Approved", "Resolved", "Active"].includes(status)) return "success";
-  if (["In-Progress", "Assigned"].includes(status)) return "progress";
+  if (["Pending", "Open", "On Leave", "Repair", "High", "Late", "On Break"].includes(status)) return "pending";
+  if (["Approved", "Resolved", "Active", "Present", "Available"].includes(status)) return "success";
+  if (["In-Progress", "Assigned", "Half Day"].includes(status)) return "progress";
   return "critical";
 }
 

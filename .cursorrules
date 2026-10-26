@@ -41,3 +41,27 @@ Always render status tags using soft pastel pill styles:
 - Implement proper query keys hierarchy (e.g., `['students', studentId]`, `['courses', listParams]`) for efficient cache invalidation.
 - Always handle loading, error, and empty states explicitly in UI components when consuming queries.
 - Use `useMutation` along with `queryClient.invalidateQueries` for POST/PUT/DELETE operations to ensure instant UI synchronization.
+
+
+## 📝 MANDATORY CHANGELOG & SYSTEM STATE DOCUMENTATION RULE
+
+To maintain context efficiency and prevent redundant full-codebase scans during future tasks, you MUST STRICTLY maintain an active log file named `CHANGELOG_STATE.md` at the project root.
+
+### 📌 Rules for Context Maintenance:
+1. **Always Check First:** Before reading the entire codebase for any new request, read `CHANGELOG_STATE.md` to quickly grasp the current implementation state, installed dependencies, API endpoints, and database schemas.
+2. **Auto-Update After Changes:** Immediately after implementing, refactoring, or fixing any feature, component, API endpoint, or DB schema, you MUST update `CHANGELOG_STATE.md`.
+
+### 📂 Standard Structure for `CHANGELOG_STATE.md`:
+Whenever you create or update `CHANGELOG_STATE.md`, maintain the following sections:
+- **Last Updated:** [Date & Timestamp]
+- **Current System Overview:** Brief summary of completed modules (e.g., Auth, Employee Dashboard, IT Helpdesk).
+- **Active Tech Stack & Dependencies:** Packages added recently (e.g., `framer-motion`, `lucide-react`, `@tanstack/react-query`).
+- **Database Schemas & Models Implemented:** Current PostgreSQL tables/entities and relations.
+- **API Endpoints Implemented:** List of controllers/routes created with methods (`GET`, `POST`, etc.).
+- **Recent Changes Log:**
+  - Date / Feature Name
+  - Files Modified/Created
+  - Key Logic & State Changes Introduced
+- **Next Pending Tasks / To-Do:** Outstanding features left to implement.
+
+**STRICT COMPLIANCE:** Do NOT end a conversation or feature task without documenting your changes in `CHANGELOG_STATE.md`.
